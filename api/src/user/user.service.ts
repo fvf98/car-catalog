@@ -4,6 +4,11 @@ import { User } from './entities';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserDto, EditUserDto } from './dtos';
 
+export interface UserFindOne {
+    id?: number;
+    email?: string;
+}
+
 @Injectable()
 export class UserService {
 
@@ -24,9 +29,9 @@ export class UserService {
     }
 
     async insert(dto: CreateUserDto) {
-        const userExist = await this.userRepository.query(`SELECT * FROM user where user.email = '${dto.email}'`);
+        const userExist = await this.findOne({ email: dto.email });
 
-        if (userExist.length) throw new BadRequestException('Ya existe un usuario con este correo');
+        if (userExist) throw new BadRequestException('Ya existe un usuario con este correo');
 
         const newUser = this.userRepository.create(dto);
         const user = await this.userRepository.save(newUser);
@@ -50,5 +55,13 @@ export class UserService {
         user.status = !user.status;
 
         return await this.userRepository.save(user);
+    }
+
+    async findOne(data: UserFindOne) {
+        return await this.userRepository
+            .createQueryBuilder('user')
+            .where(data)
+            .addSelect('user.password')
+            .getOne();
     }
 }

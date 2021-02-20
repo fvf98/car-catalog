@@ -8,6 +8,7 @@ import { AppService } from './app.service';
 import { DATABASE_HOST, DATABASE_NAME, DATABASE_PASSWORD, DATABASE_PORT, DATABASE_USERNAME } from './config/constants';
 import { UserModule } from './user/user.module';
 import { CompanyModule } from './company/company.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -33,7 +34,8 @@ import { CompanyModule } from './company/company.module';
     }),
     AccessControlModule.forRoles(roles),
     UserModule,
-    CompanyModule],
+    CompanyModule,
+    AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })

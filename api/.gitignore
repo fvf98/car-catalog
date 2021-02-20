@@ -20,6 +20,9 @@ lerna-debug.log*
 # Docker BD
 .mysql-data/
 
+# ENV file
+.env
+
 # IDEs and editors
 /.idea
 .project
