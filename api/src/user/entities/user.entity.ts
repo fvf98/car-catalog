@@ -4,8 +4,11 @@ import {
   BeforeInsert,
   BeforeUpdate,
   Entity,
+  JoinColumn,
+  ManyToOne,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
+import { Company } from 'src/company/entities';
 
 @Entity('user')
 export class User {
@@ -18,8 +21,13 @@ export class User {
   @Column({ name: 'last_name', type: 'varchar', length: 70 })
   lastName: string;
 
-  @Column({ name: 'company_id', type: 'int' })
-  companyId: number;
+  @ManyToOne(
+    () => Company,
+    company => company.id,
+    { eager: true },
+  )
+  @JoinColumn({ name: 'company_id' })
+  company: Company;
 
   @Column({ type: 'varchar', length: 40, nullable: false })
   email: string;

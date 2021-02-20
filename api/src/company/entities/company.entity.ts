@@ -1,7 +1,9 @@
+import { User } from 'src/user/entities';
 import {
   PrimaryGeneratedColumn,
   Column,
   Entity,
+  OneToOne,
 } from 'typeorm';
 
 @Entity('company')
@@ -41,5 +43,12 @@ export class Company {
 
   @Column({ type: 'bool', default: true })
   status: boolean;
+
+  @OneToOne(
+    _ => User,
+    user => user.company,
+    { cascade: true },
+  )
+  user: User;
 
 }

@@ -1,5 +1,6 @@
-import { IsString, IsEmail, MinLength, MaxLength, IsEnum, IsNumber } from "class-validator";
+import { IsString, IsEmail, MinLength, MaxLength, IsEnum, IsNumber, IsNotEmpty } from "class-validator";
 import { AppRoles } from "src/app.roles";
+import { Company } from "src/company/entities";
 import { EnumToString } from "src/helpers/enumToString";
 
 export class CreateUserDto {
@@ -11,8 +12,8 @@ export class CreateUserDto {
   @MaxLength(70)
   lastName: string;
 
-  @IsNumber()
-  companyId: number;
+  @IsNotEmpty()
+  company: Company;
 
   @IsEmail()
   @MaxLength(40)
