@@ -18,7 +18,7 @@ export class User {
   @Column({ name: 'last_name', type: 'varchar', length: 70 })
   lastName: string;
 
-  @Column({ type: 'int' })
+  @Column({ name: 'company_id', type: 'int' })
   companyId: number;
 
   @Column({ type: 'varchar', length: 40, nullable: false })
