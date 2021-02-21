@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { Auth } from '../models/Auth.model';
+import { AuthModel } from '../models/Auth.model';
 
-const API = axios.create({ baseURL: process.env.REACT_APP_API });
+const API = axios.create({ baseURL: process.env.REACT_APP_API_URL });
 
 API.interceptors.request.use((req) => {
     const token = localStorage.getItem('token');
@@ -15,4 +15,4 @@ API.interceptors.request.use((req) => {
 const endPoint = '/auth/login';
 
 
-export const login = (auth: Auth) => API.post(endPoint, auth);
+export const login = (auth: AuthModel) => API.post(endPoint, auth);

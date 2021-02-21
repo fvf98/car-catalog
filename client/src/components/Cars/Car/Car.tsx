@@ -1,18 +1,17 @@
 import React from 'react'
 import { Card, CardActions, CardContent, CardMedia, Button, Typography } from '@material-ui/core'
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
-import asd from '../../../asd.jpg';
 
 import useStyles from './styles';
+import { CarModel } from '../../../models/Car.model';
 
-const Car = () => {
+const Car = ({ car }: { car: CarModel }) => {
     const classes = useStyles();
 
     return (
         <Card className={classes.card}>
-            <CardMedia className={classes.media} image={asd} title='asd' />
+            <CardMedia className={classes.media} image={car.image} title='asd' />
             <div className={classes.overlay}>
-                <Typography variant='h6'>asd</Typography>
+                <Typography variant='h6' color='primary'>{car.company.name}</Typography>
             </div>
             {/* <div className={classes.overlay2}>
                 <Button style={{ color: 'white' }} size="small" onClick={() => { }}>
@@ -20,17 +19,17 @@ const Car = () => {
                 </Button>
             </div> */}
             <div className={classes.details}>
-                <Typography variant="body2" color="textSecondary" component="h2">Colores: </Typography>
+                <Typography variant="body2" color="textSecondary" component="h2">Colores: {car.colors.map((color) => `${color}, `)}</Typography>
             </div>
-            <Typography className={classes.title} variant='h5' gutterBottom>asdasd</Typography>
+            <Typography className={classes.title} variant='h5' gutterBottom>{car.name}</Typography>
             <CardContent >
-                <Typography variant='body1' color='textSecondary'>Modelo: 2020</Typography>
-                <Typography variant='body1' color='textSecondary'>Motor: asd</Typography>
-                <Typography variant='body1' color='textSecondary'>Transmicion: asd</Typography>
-                <Typography variant='body1' color='textSecondary'>Potencia: asd</Typography>
-                <Typography variant='body1' color='textSecondary'>Cilindros: asd</Typography>
-                <Typography variant='body1' color='textSecondary'>Numero de puertas: asd</Typography>
-                <Typography variant='body1' color='textSecondary'>Precio: asd</Typography>
+                <Typography variant='body1' color='textSecondary'>Modelo: {car.model}</Typography>
+                <Typography variant='body1' color='textSecondary'>Motor: {car.motor}</Typography>
+                <Typography variant='body1' color='textSecondary'>Transmicion: {car.transmision}</Typography>
+                <Typography variant='body1' color='textSecondary'>Potencia: {car.power}</Typography>
+                <Typography variant='body1' color='textSecondary'>Cilindros: {car.cylinders}</Typography>
+                <Typography variant='body1' color='textSecondary'>Numero de puertas: {car.numDoors}</Typography>
+                <Typography variant='body1' color='textSecondary'>Precio: {car.price}</Typography>
             </CardContent>
             <CardActions className={classes.cardActions}>
                 {/* <Button size='small' color='primary' onClick={() => dispatch(likePost(post._id))}>

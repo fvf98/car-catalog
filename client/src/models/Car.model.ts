@@ -1,9 +1,9 @@
-import { Company } from "./Company.model";
+import { CompanyModel } from "./Company.model";
 
-export interface Car {
+export interface CarModel {
     id: number;
     name: string;
-    company: Company;
+    company: CompanyModel;
     model: string;
     motor: string;
     power: string;

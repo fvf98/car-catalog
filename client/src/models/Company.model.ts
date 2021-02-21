@@ -1,4 +1,4 @@
-export interface Company {
+export interface CompanyModel {
     id: number;
     name: string;
     webURL: string;

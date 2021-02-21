@@ -1,29 +1,25 @@
-import React from 'react';
-import { Container, AppBar, Typography, Grow, Grid, Toolbar, IconButton, InputBase } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
+import React, { useEffect } from 'react';
+import { Container, AppBar, Button, Grow, Grid, Toolbar, IconButton, InputBase } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
+import { useDispatch } from 'react-redux';
 
 import Cars from './components/Cars/Cars';
 import useStyles from './styles';
+import { getCars } from './redux/actions/car';
 
 function App() {
+  const dispatch = useDispatch();
   const classes = useStyles();
+
+  useEffect(() => {
+    dispatch(getCars());
+  }, [dispatch]);
+
   return (
     <Container maxWidth='lg'>
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <IconButton
-              edge="start"
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="open drawer"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography className={classes.title} variant="h6" noWrap>
-              Material-UI
-          </Typography>
             <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />

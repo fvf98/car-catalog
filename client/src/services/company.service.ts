@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { Company } from '../models/Company.model';
+import { CompanyModel } from '../models/Company.model';
 
-const API = axios.create({ baseURL: process.env.REACT_APP_API });
+const API = axios.create({ baseURL: process.env.REACT_APP_API_URL });
 
 API.interceptors.request.use((req) => {
     const token = localStorage.getItem('token');
@@ -15,6 +15,6 @@ API.interceptors.request.use((req) => {
 const endPoint = '/company';
 
 export const fetchCompanies = () => API.get(endPoint);
-export const createCompany = (newCompany: Company) => API.post(endPoint, newCompany);
-export const updateCompany = (id: number, updatedCompany: Company) => API.patch(`${endPoint}/${id}`, updatedCompany);
+export const createCompany = (newCompany: CompanyModel) => API.post(endPoint, newCompany);
+export const updateCompany = (id: number, updatedCompany: CompanyModel) => API.patch(`${endPoint}/${id}`, updatedCompany);
 export const deleteCompany = (id: number) => API.patch(`${endPoint}/${id}`);

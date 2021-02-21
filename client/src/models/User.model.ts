@@ -1,8 +1,8 @@
-import { Company } from "./Company.model";
+import { CompanyModel } from "./Company.model";
 
-export interface User {
+export interface UserModel {
     id: number;
-    company: Company;
+    company: CompanyModel;
     name: string;
     lastName: string;
     email: string;
