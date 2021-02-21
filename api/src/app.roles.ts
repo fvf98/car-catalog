@@ -11,6 +11,18 @@ export enum AppResource {
   COMPANY = 'COMPANY'
 }
 
+export enum AppPossession {
+  OWN = 'own',
+  ANY = 'any'
+}
+
+export enum AppActions {
+  CREATE = 'create',
+  UPDATE = 'update',
+  READ = 'read',
+  DELETE = 'delete'
+}
+
 export const roles: RolesBuilder = new RolesBuilder();
 
 roles

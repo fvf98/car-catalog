@@ -3,7 +3,7 @@ import { UserService } from './user.service';
 import { Auth, User } from 'src/common/decorators';
 import { User as UserEntity } from './entities';
 import { CreateUserDto, EditUserDto } from './dtos';
-import { AppResource, AppRoles } from 'src/app.roles';
+import { AppActions, AppPossession, AppResource, AppRoles } from 'src/app.roles';
 import { InjectRolesBuilder, RolesBuilder } from 'nest-access-control';
 
 @Controller('user')
@@ -16,8 +16,8 @@ export class UserController {
     ) { }
 
     @Auth({
-        possession: 'any',
-        action: 'read',
+        possession: AppPossession.ANY,
+        action: AppActions.READ,
         resource: AppResource.USER,
     })
     @Get()
@@ -27,8 +27,8 @@ export class UserController {
     }
 
     @Auth({
-        possession: 'own',
-        action: 'read',
+        possession: AppPossession.OWN,
+        action: AppActions.READ,
         resource: AppResource.USER,
     })
     @Get(':id')
@@ -40,8 +40,8 @@ export class UserController {
     }
 
     @Auth({
-        possession: 'any',
-        action: 'create',
+        possession: AppPossession.ANY,
+        action: AppActions.CREATE,
         resource: AppResource.USER,
     })
     @Post()
@@ -53,8 +53,8 @@ export class UserController {
     }
 
     @Auth({
-        possession: 'own',
-        action: 'update',
+        possession: AppPossession.OWN,
+        action: AppActions.UPDATE,
         resource: AppResource.USER,
     })
     @Put(':id')
@@ -71,8 +71,8 @@ export class UserController {
     }
 
     @Auth({
-        possession: 'any',
-        action: 'delete',
+        possession: AppPossession.ANY,
+        action: AppActions.DELETE,
         resource: AppResource.USER,
     })
     @Patch(':id')
