@@ -39,7 +39,7 @@ export class CarController {
         @Body() dto: CreateCarDto
     ) {
         const data = await this.carService.insert(dto);
-        return { message: 'Compañia creada correctamente', data };
+        return { message: 'Carro creado correctamente', data };
     }
 
     @Auth({

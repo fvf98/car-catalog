@@ -25,8 +25,8 @@ export class CarService {
     }
 
     async insert(dto: CreateCarDto) {
-        const carExist = await this.carRepository.findOne({ name: dto.name });
-        if (carExist) throw new BadRequestException('Ya existe un carro con este nombre');
+        const carExist = await this.carRepository.query(`SELECT * FROM car where name='${dto.name}'`);
+        if (carExist.length) throw new BadRequestException('Ya existe un carro con este nombre');
 
         const newCar = this.carRepository.create(dto);
         const car = await this.carRepository.save(newCar);

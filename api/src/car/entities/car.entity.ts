@@ -3,7 +3,6 @@ import {
 	PrimaryGeneratedColumn,
 	Column,
 	Entity,
-	OneToOne,
 	ManyToOne,
 	JoinColumn,
 } from 'typeorm';
@@ -45,8 +44,8 @@ export class Car {
 	@Column({ type: 'float' })
 	price: number;
 
-	@Column({ type: 'simple-array' })
-	images: string[];
+	@Column({ type: 'varchar', length: 50 })
+	image: string;
 
 	@Column({ type: 'simple-array' })
 	colors: string[];

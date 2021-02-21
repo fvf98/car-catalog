@@ -10,10 +10,6 @@ export class CreateCarDto {
 	company: Company;
 
 	@IsString()
-	@MaxLength(255)
-	logo: string;
-
-	@IsString()
 	@MaxLength(20)
 	model: string;
 
@@ -38,9 +34,8 @@ export class CreateCarDto {
 	@IsNumber()
 	price: number;
 
-	@IsString({ each: true })
-	@IsArray()
-	images: string[];
+	@IsString()
+	image: string;
 
 	@IsString({ each: true })
 	@IsArray()
