@@ -8,7 +8,8 @@ export enum AppRoles {
 
 export enum AppResource {
   USER = 'USER',
-  COMPANY = 'COMPANY'
+  COMPANY = 'COMPANY',
+  CAR = 'CAR'
 }
 
 export enum AppPossession {
@@ -29,7 +30,8 @@ roles
   //EMPLOYEE ROLES
   .grant(AppRoles.EMPLOYEE)
   .readOwn([AppResource.USER])
-  .updateOwn([AppResource.USER])
+  .updateOwn([AppResource.USER, AppResource.CAR])
+  .createOwn([AppResource.CAR])
   // MANAGER ROLES
   .grant(AppRoles.MANAGER)
   .extend(AppRoles.EMPLOYEE)
@@ -40,7 +42,6 @@ roles
   // ADMIN ROLES
   .grant(AppRoles.ADMIN)
   .extend(AppRoles.MANAGER)
-  .updateAny([AppResource.USER])
-  .createAny([AppResource.COMPANY])
-  .updateAny([AppResource.COMPANY])
-  .deleteAny([AppResource.COMPANY]);
+  .createAny([AppResource.COMPANY, AppResource.CAR])
+  .updateAny([AppResource.COMPANY, AppResource.CAR, AppResource.USER])
+  .deleteAny([AppResource.COMPANY, AppResource.CAR]);

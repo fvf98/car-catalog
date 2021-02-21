@@ -1,3 +1,4 @@
+import { Car } from 'src/car/entities/car.entity';
 import { User } from 'src/user/entities';
 import {
   PrimaryGeneratedColumn,
@@ -50,5 +51,12 @@ export class Company {
     { cascade: true },
   )
   user: User;
+
+  @OneToOne(
+    _ => Car,
+    car => car.company,
+    { cascade: true },
+  )
+  car: Car;
 
 }
