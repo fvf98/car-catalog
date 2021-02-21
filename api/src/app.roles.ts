@@ -8,6 +8,7 @@ export enum AppRoles {
 
 export enum AppResource {
   USER = 'USER',
+  COMPANY = 'COMPANY'
 }
 
 export const roles: RolesBuilder = new RolesBuilder();
@@ -21,9 +22,13 @@ roles
   .grant(AppRoles.MANAGER)
   .extend(AppRoles.EMPLOYEE)
   .readAny([AppResource.USER])
-  .updateAny([AppResource.USER])
   .createAny([AppResource.USER])
   .deleteAny([AppResource.USER])
+  .updateOwn([AppResource.COMPANY])
   // ADMIN ROLES
   .grant(AppRoles.ADMIN)
-  .extend(AppRoles.MANAGER);
+  .extend(AppRoles.MANAGER)
+  .updateAny([AppResource.USER])
+  .createAny([AppResource.COMPANY])
+  .updateAny([AppResource.COMPANY])
+  .deleteAny([AppResource.COMPANY]);

@@ -17,13 +17,19 @@ export class UserService {
         private readonly userRepository: Repository<User>
     ) { }
 
-    async list() {
-        return await this.userRepository.find();
+    async list(userEntity?: User) {
+        const users = userEntity ? await this.userRepository.find({ company: userEntity.company })
+            : await this.userRepository.find();
+
+        return users;
     }
 
-    async get(id: number) {
-        const user = await this.userRepository.findOne(id);
-        if (!user) throw new NotFoundException('Usuario no encontrado');
+    async get(id: number, userEntity?: User) {
+        const user = await this.userRepository
+            .findOne(id)
+            .then(u => (!userEntity ? u : !!u && userEntity.id === u.id ? u : null));
+
+        if (!user) throw new NotFoundException('Usuario no encontrado o action no autorizada');
 
         return user;
     }
@@ -40,8 +46,8 @@ export class UserService {
         return user;
     }
 
-    async update(id: number, dto: EditUserDto) {
-        const userBefor = await this.get(id);
+    async update(id: number, dto: EditUserDto, userEntity?: User) {
+        const userBefor = await this.get(id, userEntity);
         const editedUser = Object.assign(userBefor, dto);
 
         const userAfter = await this.userRepository.save(editedUser);
