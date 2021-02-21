@@ -26,9 +26,9 @@ const Cars = () => {
                 <Grid item xs={12} sm={6} md={6}>
                     <Car />
                 </Grid>
-                {/* {posts.map((post) => (
-                    <Grid key={post._id} item xs={12} sm={6} md={6}>
-                        <Post post={post} setCurrentId={setCurrentId} />
+                {/* {cars.map((car) => (
+                    <Grid key={car.id} item xs={12} sm={6} md={6}>
+                        <Car car={car} />
                     </Grid>
                 ))} */}
             </Grid>
