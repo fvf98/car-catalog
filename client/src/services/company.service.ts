@@ -1,20 +1,22 @@
-import axios from 'axios';
 import { CompanyModel } from '../models/Company.model';
-
-const API = axios.create({ baseURL: process.env.REACT_APP_API_URL });
-
-API.interceptors.request.use((req) => {
-    const token = localStorage.getItem('token');
-    if (token) {
-        req.headers.Authorization = `Bearer ${token}`;
-    }
-
-    return req;
-});
+import { toast } from 'react-toastify';
+import { API } from './base.service';
 
 const endPoint = '/company';
+const report = (text: String) => toast.error(text);
 
-export const fetchCompanies = () => API.get(endPoint);
-export const createCompany = (newCompany: CompanyModel) => API.post(endPoint, newCompany);
-export const updateCompany = (id: number, updatedCompany: CompanyModel) => API.patch(`${endPoint}/${id}`, updatedCompany);
-export const deleteCompany = (id: number) => API.patch(`${endPoint}/${id}`);
+export const fetchCompanies = () => API.get(endPoint)
+    .then((data) => data.data)
+    .catch((error) => report(error.response.data.message));
+
+export const createCompany = (newCompany: CompanyModel) => API.post(endPoint, newCompany)
+    .then((data) => data.data)
+    .catch((error) => report(error.response.data.message));
+
+export const updateCompany = (id: number, updatedCompany: CompanyModel) => API.patch(`${endPoint}/${id}`, updatedCompany)
+    .then((data) => data.data)
+    .catch((error) => report(error.response.data.message));
+
+export const deleteCompany = (id: number) => API.patch(`${endPoint}/${id}`)
+    .then((data) => data.data)
+    .catch((error) => report(error.response.data.message));

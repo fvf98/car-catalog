@@ -1,20 +1,22 @@
-import axios from 'axios';
 import { CarModel } from '../models/Car.model';
-
-const API = axios.create({ baseURL: process.env.REACT_APP_API_URL });
-
-API.interceptors.request.use((req) => {
-    const token = localStorage.getItem('token');
-    if (token) {
-        req.headers.Authorization = `Bearer ${token}`;
-    }
-
-    return req;
-});
+import { toast } from 'react-toastify';
+import { API } from './base.service';
 
 const endPoint = '/car';
+const report = (text: String) => toast.error(text);
 
-export const fetchCars = () => API.get(endPoint).then(data => { return data.data });
-export const createCar = (newCar: CarModel) => API.post(endPoint, newCar);
-export const updateCar = (id: number, updatedCar: CarModel) => API.patch(`${endPoint}/${id}`, updatedCar);
-export const deleteCar = (id: number) => API.patch(`${endPoint}/${id}`);
+export const fetchCars = () => API.get(endPoint)
+    .then((data) => data.data)
+    .catch((error) => report(error.response.data.message));
+
+export const createCar = (newCar: CarModel) => API.post(endPoint, newCar)
+    .then((data) => data.data)
+    .catch((error) => report(error.response.data.message));
+
+export const updateCar = (id: number, updatedCar: CarModel) => API.put(`${endPoint}/${id}`, updatedCar)
+    .then((data) => data.data)
+    .catch((error) => report(error.response.data.message));
+
+export const deleteCar = (id: number) => API.patch(`${endPoint}/${id}`)
+    .then((data) => data.data)
+    .catch((error) => report(error.response.data.message));

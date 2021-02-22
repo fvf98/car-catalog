@@ -48,8 +48,4 @@ export default makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'space-between',
     },
-    add: {
-        marginBottom: 20
-    }
-
 }));

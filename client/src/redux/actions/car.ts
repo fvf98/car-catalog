@@ -1,40 +1,44 @@
-import { FETCH_ALL, CREATE, UPDATE, DELETE } from '../../constants/actionTypes';
+import { FETCH_ALL_CARS, CREATE_CAR, UPDATE_CAR, DELETE_CAR, SET_EDITING_CAR } from '../../constants/actionTypes';
 import { CarModel } from '../../models/Car.model';
 import * as carService from '../../services/car.service';
 
-export const getCars = (id?: number) => async (dispatch: any) => {
-    try {
-        const { data } = await carService.fetchCars();
-        dispatch({ type: FETCH_ALL, payload: { data, id } });
-    } catch (error) {
-        console.log(error);
+export const getCars = (id?: number, all?: boolean) => async (dispatch: any) => {
+    const response = await carService.fetchCars();
+
+    if (response.data) {
+        const { data } = response;
+        dispatch({ type: FETCH_ALL_CARS, payload: { data, id, all } });
     }
+
+}
+
+export const setEditing = (car: CarModel) => async (dispatch: any) => {
+    dispatch({ type: SET_EDITING_CAR, payload: car });
 }
 
 export const createCar = (car: CarModel) => async (dispatch: any) => {
-    try {
-        const { data } = await carService.createCar(car);
-        dispatch({ type: CREATE, payload: data });
-    } catch (error) {
-        console.log(error);
+    const response = await carService.createCar(car);
+
+    if (response.data) {
+        const { data } = response;
+        dispatch({ type: CREATE_CAR, payload: data });
     }
+
 }
 
 export const updateCar = (id: number, car: CarModel) => async (dispatch: any) => {
-    try {
-        const { data } = await carService.updateCar(id, car);
-        dispatch({ type: UPDATE, payload: data });
-    } catch (error) {
-        console.log(error);
+    const response = await carService.updateCar(id, car);
+
+    if (response.data) {
+        const { data } = response;
+        dispatch({ type: UPDATE_CAR, payload: data });
     }
+
 };
 
 export const deleteCar = (id: number) => async (dispatch: any) => {
-    try {
-        await carService.deleteCar(id);
-        dispatch({ type: DELETE, payload: id });
-    } catch (error) {
-        console.log(error);
-    }
+    await carService.deleteCar(id);
+    dispatch({ type: DELETE_CAR, payload: id });
+
 };
 

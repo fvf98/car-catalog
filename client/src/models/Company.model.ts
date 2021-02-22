@@ -11,3 +11,17 @@ export interface CompanyModel {
     col: string;
     status: boolean;
 }
+
+export const initialCompanyModel: CompanyModel = {
+    id: 0,
+    name: '',
+    webURL: '',
+    country: '',
+    street: '',
+    number: '',
+    cp: '',
+    state: '',
+    city: '',
+    col: '',
+    status: true
+};

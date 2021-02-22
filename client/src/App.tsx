@@ -11,6 +11,7 @@ import { getCars } from './redux/actions/car';
 import FormLogin from './components/Admin/FormLogin/FormLogin';
 import { RootState } from './redux/reducers';
 import { logOut } from './redux/actions/auth';
+import { getCompanies } from './redux/actions/company';
 
 interface TabPanelProps {
 	children?: React.ReactNode;
@@ -55,9 +56,11 @@ function App() {
 
 	useEffect(() => {
 		if (userData.accessToken) {
+			dispatch(getCompanies());
 			setOpenLogin(false);
 			if (userData.user.roles != 'Administrador')
 				dispatch(getCars(userData.user.company.id));
+			else dispatch(getCars(0, true));
 		}
 		else dispatch(getCars());
 	}, [userData, dispatch]);
@@ -102,16 +105,16 @@ function App() {
 							<>
 								<Button color="inherit" onClick={() => dispatch(logOut())}>Cerrar sesion</Button>
 								<Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-									<Tab label="Vehiculos" {...a11yProps(1)} />
 									{
-										(userData.user.roles == 'Administrador' || 'Gerente') &&
+										(userData.user.roles == 'Administrador' || userData.user.roles == 'Gerente') &&
+										<Tab label="Compañias" {...a11yProps(1)} />
+									}
+									{
+										(userData.user.roles == 'Administrador' || userData.user.roles == 'Gerente') &&
 										<Tab label="Usuarios" {...a11yProps(2)} />
 
 									}
-									{
-										(userData.user.roles == 'Administrador' || 'Gerente') &&
-										<Tab label="Compañias" {...a11yProps(3)} />
-									}
+									<Tab label="Vehiculos" {...a11yProps(3)} />
 								</Tabs>
 							</>
 						}
@@ -126,25 +129,25 @@ function App() {
 						<Container>
 							<Grid container justify='space-between' alignItems='stretch' spacing={3}>
 								<Grid item xs='auto' sm={12}>
-									<Cars userData={userData} />
+									<Cars />
 								</Grid>
 							</Grid>
 						</Container>
 						:
 						<Container>
 							<TabPanel value={value} index={0}>
+								Page Three
+              				</TabPanel>
+							<TabPanel value={value} index={1}>
+								Page Two
+              				</TabPanel>
+							<TabPanel value={value} index={2}>
 								<Grid container justify='space-between' alignItems='stretch' spacing={3}>
 									<Grid item xs='auto' sm={12}>
-										<Cars userData={userData} />
+										<Cars />
 									</Grid>
 								</Grid>
 							</TabPanel>
-							<TabPanel value={value} index={1}>
-								Page Two
-              </TabPanel>
-							<TabPanel value={value} index={2}>
-								Page Three
-              </TabPanel>
 						</Container>
 				}
 			</Grow>

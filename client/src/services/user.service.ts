@@ -1,20 +1,22 @@
-import axios from 'axios';
 import { UserModel } from '../models/User.model';
-
-const API = axios.create({ baseURL: process.env.REACT_APP_API_URL });
-
-API.interceptors.request.use((req) => {
-    const token = localStorage.getItem('token');
-    if (token) {
-        req.headers.Authorization = `Bearer ${token}`;
-    }
-
-    return req;
-});
+import { toast } from 'react-toastify';
+import { API } from './base.service';
 
 const endPoint = '/user';
+const report = (text: String) => toast.error(text);
 
-export const fetchUsers = () => API.get(endPoint);
-export const createUser = (newUser: UserModel) => API.post(endPoint, newUser);
-export const updateUser = (id: number, updatedUser: UserModel) => API.patch(`${endPoint}/${id}`, updatedUser);
-export const deleteUser = (id: number) => API.patch(`${endPoint}/${id}`);
+export const fetchUsers = () => API.get(endPoint)
+    .then((data) => data.data)
+    .catch((error) => report(error.response.data.message));
+
+export const createUser = (newUser: UserModel) => API.post(endPoint, newUser)
+    .then((data) => data.data)
+    .catch((error) => report(error.response.data.message));
+
+export const updateUser = (id: number, updatedUser: UserModel) => API.patch(`${endPoint}/${id}`, updatedUser)
+    .then((data) => data.data)
+    .catch((error) => report(error.response.data.message));
+
+export const deleteUser = (id: number) => API.patch(`${endPoint}/${id}`)
+    .then((data) => data.data)
+    .catch((error) => report(error.response.data.message));

@@ -21,8 +21,8 @@ const FormLogin = ({ isOpenLogin, setOpenLogin }: { isOpenLogin: boolean, setOpe
     }
 
     return (
-        <Dialog open={isOpenLogin} onClose={handleClose} aria-labelledby="form-dialog-title">
-            <DialogTitle id="form-dialog-title">Iniciar sesion</DialogTitle>
+        <Dialog open={isOpenLogin} onClose={handleClose} aria-labelledby="FormLogin">
+            <DialogTitle id="FormLogin">Iniciar sesion</DialogTitle>
             <DialogContent>
                 <TextField
                     autoFocus

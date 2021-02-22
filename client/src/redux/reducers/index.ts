@@ -1,16 +1,20 @@
 import { combineReducers } from 'redux';
-import { CarModel } from '../../models/Car.model';
+import userLogged from './auth';
 import { UserloggedModel } from '../../models/UserLogged.model';
 import cars from './car';
-import userLogged from './auth';
+import { CarState } from '../../models/CarState.mode';
+import companies from './company';
+import { CompanyState } from '../../models/CompanyState.model';
 
 export interface State {
-    cars: CarModel[],
+    cars: CarState,
+    companies: CompanyState,
     userLogged: UserloggedModel
 }
 
 export const rootReducer = combineReducers<State>({
     cars,
+    companies,
     userLogged
 })
 
