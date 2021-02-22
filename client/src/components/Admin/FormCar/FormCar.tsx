@@ -32,6 +32,7 @@ const FormCar = ({ isOpenCar, setOpenCar }: { isOpenCar: boolean, setOpenCar: an
                 dispatch(updateCar(car.id, carForm));
             else
                 dispatch(createCar(carForm));
+            handleClose();
         }
         else report('Favor de rellenar todos los datos')
     }
@@ -140,10 +141,10 @@ const FormCar = ({ isOpenCar, setOpenCar }: { isOpenCar: boolean, setOpenCar: an
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleClose} color="primary">
-                    Cancel
+                    Cancelar
                 </Button>
                 <Button onClick={handleSubmit} color="primary">
-                    Iniciar sesion
+                    {car.id ? 'Guardar' : 'Crear'}
                 </Button>
             </DialogActions>
         </Dialog>

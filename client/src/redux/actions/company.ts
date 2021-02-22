@@ -37,7 +37,11 @@ export const updateCompany = (id: number, company: CompanyModel) => async (dispa
 };
 
 export const deleteCompany = (id: number) => async (dispatch: any) => {
-    await companyService.deleteCompany(id);
-    dispatch({ type: DELETE_COMPANY, payload: id });
+    const response = await companyService.deleteCompany(id);
+
+    if (response.data) {
+        const { data } = response;
+        dispatch({ type: DELETE_COMPANY, payload: data });
+    }
 
 };

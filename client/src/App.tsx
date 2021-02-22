@@ -12,6 +12,7 @@ import FormLogin from './components/Admin/FormLogin/FormLogin';
 import { RootState } from './redux/reducers';
 import { logOut } from './redux/actions/auth';
 import { getCompanies } from './redux/actions/company';
+import Companies from './components/Admin/Companies/Companies';
 
 interface TabPanelProps {
 	children?: React.ReactNode;
@@ -56,11 +57,15 @@ function App() {
 
 	useEffect(() => {
 		if (userData.accessToken) {
-			dispatch(getCompanies());
 			setOpenLogin(false);
-			if (userData.user.roles != 'Administrador')
+			if (userData.user.roles != 'Administrador') {
 				dispatch(getCars(userData.user.company.id));
-			else dispatch(getCars(0, true));
+				dispatch(getCompanies(userData.user.company.id));
+			}
+			else {
+				dispatch(getCars(0, true));
+				dispatch(getCompanies());
+			}
 		}
 		else dispatch(getCars());
 	}, [userData, dispatch]);
@@ -87,34 +92,21 @@ function App() {
 						{!userData.accessToken ?
 							<>
 								<Button color="inherit" onClick={() => setOpenLogin(true)}>Iniciar sesion</Button>
-								<div className={classes.search}>
-									<div className={classes.searchIcon}>
-										<SearchIcon />
-									</div>
-									<InputBase
-										placeholder="Buscar..."
-										classes={{
-											root: classes.inputRoot,
-											input: classes.inputInput,
-										}}
-										inputProps={{ 'aria-label': 'buscar' }}
-									/>
-								</div>
 							</>
 							:
 							<>
 								<Button color="inherit" onClick={() => dispatch(logOut())}>Cerrar sesion</Button>
 								<Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+									<Tab label="Vehiculos" {...a11yProps(1)} />
 									{
 										(userData.user.roles == 'Administrador' || userData.user.roles == 'Gerente') &&
-										<Tab label="Compañias" {...a11yProps(1)} />
+										<Tab label="Compañias" {...a11yProps(2)} />
 									}
 									{
 										(userData.user.roles == 'Administrador' || userData.user.roles == 'Gerente') &&
-										<Tab label="Usuarios" {...a11yProps(2)} />
+										<Tab label="Usuarios" {...a11yProps(3)} />
 
 									}
-									<Tab label="Vehiculos" {...a11yProps(3)} />
 								</Tabs>
 							</>
 						}
@@ -136,18 +128,18 @@ function App() {
 						:
 						<Container>
 							<TabPanel value={value} index={0}>
-								Page Three
-              				</TabPanel>
-							<TabPanel value={value} index={1}>
-								Page Two
-              				</TabPanel>
-							<TabPanel value={value} index={2}>
 								<Grid container justify='space-between' alignItems='stretch' spacing={3}>
 									<Grid item xs='auto' sm={12}>
 										<Cars />
 									</Grid>
 								</Grid>
 							</TabPanel>
+							<TabPanel value={value} index={1}>
+								<Companies />
+							</TabPanel>
+							<TabPanel value={value} index={2}>
+								Page Two
+              				</TabPanel>
 						</Container>
 				}
 			</Grow>
