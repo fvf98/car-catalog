@@ -19,7 +19,7 @@ export class CreateCarDto {
 
 	@IsString()
 	@MaxLength(40)
-	transmision: string;
+	transmission: string;
 
 	@IsString()
 	@MaxLength(30)
@@ -29,7 +29,7 @@ export class CreateCarDto {
 	cylinders: number;
 
 	@IsNumber()
-	numDors: number;
+	numDoors: number;
 
 	@IsNumber()
 	price: number;

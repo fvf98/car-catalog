@@ -30,7 +30,7 @@ export class Car {
 	motor: string;
 
 	@Column({ type: 'varchar', length: 40 })
-	transmision: string;
+	transmission: string;
 
 	@Column({ type: 'varchar', length: 30 })
 	power: string;
@@ -38,8 +38,8 @@ export class Car {
 	@Column({ type: 'int' })
 	cylinders: number;
 
-	@Column({ type: 'int' })
-	numDors: number;
+	@Column({ type: 'int', name: 'num_doors' })
+	numDoors: number;
 
 	@Column({ type: 'float' })
 	price: number;

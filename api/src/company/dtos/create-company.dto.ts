@@ -10,10 +10,6 @@ export class CreateCompanyDto {
   webURL: string;
 
   @IsString()
-  @MaxLength(255)
-  logo: string;
-
-  @IsString()
   @MaxLength(40)
   country: string;
 

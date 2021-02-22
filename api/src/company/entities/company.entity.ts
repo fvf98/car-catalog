@@ -18,9 +18,6 @@ export class Company {
   @Column({ name: 'web_url', type: 'varchar', length: 70 })
   webURL: string;
 
-  @Column({ type: 'varchar', length: 255 })
-  logo: string;
-
   @Column({ type: 'varchar', length: 40 })
   country: string;
 
