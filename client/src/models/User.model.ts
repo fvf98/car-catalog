@@ -7,6 +7,6 @@ export interface UserModel {
     lastName: string;
     email: string;
     password: string;
-    rol: string;
+    roles: string;
     status: boolean;
 }

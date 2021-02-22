@@ -2,16 +2,16 @@ import { FETCH_ALL, CREATE, UPDATE, DELETE } from '../../constants/actionTypes';
 import { CarModel } from '../../models/Car.model';
 import * as carService from '../../services/car.service';
 
-export const getCars = () => async (dispatch: any) => {
+export const getCars = (id?: number) => async (dispatch: any) => {
     try {
         const { data } = await carService.fetchCars();
-        dispatch({ type: FETCH_ALL, payload: data });
+        dispatch({ type: FETCH_ALL, payload: { data, id } });
     } catch (error) {
         console.log(error);
     }
 }
 
-export const createCars = (car: CarModel) => async (dispatch: any) => {
+export const createCar = (car: CarModel) => async (dispatch: any) => {
     try {
         const { data } = await carService.createCar(car);
         dispatch({ type: CREATE, payload: data });
@@ -20,7 +20,7 @@ export const createCars = (car: CarModel) => async (dispatch: any) => {
     }
 }
 
-export const updateCars = (id: number, car: CarModel) => async (dispatch: any) => {
+export const updateCar = (id: number, car: CarModel) => async (dispatch: any) => {
     try {
         const { data } = await carService.updateCar(id, car);
         dispatch({ type: UPDATE, payload: data });
@@ -29,7 +29,7 @@ export const updateCars = (id: number, car: CarModel) => async (dispatch: any) =
     }
 };
 
-export const deleteCars = (id: number) => async (dispatch: any) => {
+export const deleteCar = (id: number) => async (dispatch: any) => {
     try {
         await carService.deleteCar(id);
         dispatch({ type: DELETE, payload: id });
@@ -37,3 +37,4 @@ export const deleteCars = (id: number) => async (dispatch: any) => {
         console.log(error);
     }
 };
+

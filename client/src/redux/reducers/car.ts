@@ -4,7 +4,10 @@ import { CarModel } from '../../models/Car.model';
 export default (cars: CarModel[] = [], action: { type: any; payload: any; }) => {
     switch (action.type) {
         case FETCH_ALL:
-            return action.payload;
+            if (action.payload.id)
+                return action.payload.data.filter((car: CarModel) => car.company.id === action.payload.id)
+            else
+                return action.payload.data;
         case CREATE:
             return [...cars, action.payload];
         case UPDATE:
