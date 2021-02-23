@@ -20,6 +20,7 @@ const columns: Column[] = [
     { id: 'state', label: 'Estado', minWidth: 100 },
     { id: 'city', label: 'Ciudad', minWidth: 100 },
     { id: 'col', label: 'Colonia', minWidth: 100 },
+    { id: 'status', label: 'Estatus', minWidth: 100, format: (value: boolean) => value ? "Activo" : "Baja" },
 
 ];
 

@@ -15,6 +15,7 @@ const columns: Column[] = [
     { id: 'lastName', label: 'Apellidos', minWidth: 100 },
     { id: 'email', label: 'Correo', minWidth: 100 },
     { id: 'roles', label: 'Roles', minWidth: 100 },
+    { id: 'status', label: 'Estatus', minWidth: 100, format: (value: boolean) => value ? "Activo" : "Baja" },
 
 ];
 

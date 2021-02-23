@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { CircularProgress, Paper, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, TablePagination, Button } from '@material-ui/core';
+import { CircularProgress, Paper, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, TablePagination, Button, Typography, Tooltip } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 import EditIcon from '@material-ui/icons/Edit';
 import useStyles from './styles';
 
@@ -34,6 +35,12 @@ const SharedTable = ({ rows, columns, update, upDown }: { rows: any, columns: an
                                         {column.label}
                                     </TableCell>
                                 ))}
+                                <TableCell
+                                    key='acciones'
+                                    align='center'
+                                    style={{ minWidth: 100 }}>
+                                    acciones
+                                    </TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -44,18 +51,30 @@ const SharedTable = ({ rows, columns, update, upDown }: { rows: any, columns: an
                                             const value = row[column.id];
                                             return (
                                                 <TableCell key={column.id} align={column.align}>
-                                                    {column.format && typeof value === 'number' ? column.format(value) : value}
+                                                    {column.format && typeof value === 'boolean' ? column.format(value) : value}
                                                 </TableCell>
                                             );
                                         })}
                                         {
                                             (row.company || row.webURL) &&
-                                            <TableCell key='actions' align='right'>
+                                            <TableCell key='actions' align='center'>
                                                 <Button size='small' color='primary' onClick={() => update(row)}>
-                                                    <EditIcon fontSize="small" />
+                                                    <Tooltip title="Modificar">
+                                                        <EditIcon fontSize="small" />
+                                                    </Tooltip>
                                                 </Button>
-                                                <Button size='small' color='secondary' onClick={() => upDown(row.id)}>
-                                                    <DeleteIcon fontSize="small" />
+                                                <Button size='small' color={row.status ? 'secondary' : 'primary'} onClick={() => upDown(row.id)}>
+                                                    {
+                                                        row.status ?
+                                                            <Tooltip title="Dar de baja">
+                                                                <DeleteIcon fontSize="small" />
+                                                            </Tooltip>
+                                                            :
+                                                            <Tooltip title="Dar de alta">
+                                                                <AddCircleIcon fontSize="large" />
+                                                            </Tooltip>
+
+                                                    }
                                                 </Button>
                                             </TableCell>
                                         }
