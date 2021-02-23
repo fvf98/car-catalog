@@ -1,11 +1,10 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, InputLabel, MenuItem, Select, TextField } from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
-import { CarModel, initialCarModel } from '../../../models/Car.model';
+import { initialCarModel } from '../../../models/Car.model';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { createCar, setEditing, updateCar } from '../../../redux/actions/car';
 import { RootState } from '../../../redux/reducers';
-import company from '../../../redux/reducers/company';
 import { CompanyModel } from '../../../models/Company.model';
 
 const FormCar = ({ isOpenCar, setOpenCar }: { isOpenCar: boolean, setOpenCar: any }) => {

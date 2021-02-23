@@ -6,7 +6,7 @@ export interface UserModel {
     name: string;
     lastName: string;
     email: string;
-    password: string;
+    password?: string;
     roles: string;
     status: boolean;
 }
@@ -17,7 +17,6 @@ export const initialUserModel: UserModel = {
     name: '',
     lastName: '',
     email: '',
-    password: '',
     roles: '',
     status: true
 };

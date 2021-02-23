@@ -12,7 +12,6 @@ export const fetchUsers = () => API.get(endPoint)
 
 export const createUser = (newUser: UserModel) => API.post(endPoint, newUser)
     .then((data: any) => {
-        console.log(data)
         notify(data.data.message);
         return data.data
     })
@@ -20,7 +19,6 @@ export const createUser = (newUser: UserModel) => API.post(endPoint, newUser)
 
 export const updateUser = (id: number, updatedUser: UserModel) => API.put(`${endPoint}/${id}`, updatedUser)
     .then((data: any) => {
-        console.log(data)
         notify(data.data.message);
         return data.data
     })
@@ -28,7 +26,6 @@ export const updateUser = (id: number, updatedUser: UserModel) => API.put(`${end
 
 export const deleteUser = (id: number) => API.patch(`${endPoint}/${id}`)
     .then((data: any) => {
-        console.log(data)
         notify(data.data.message);
         return data.data
     })

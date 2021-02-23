@@ -12,7 +12,6 @@ export const fetchCompanies = () => API.get(endPoint)
 
 export const createCompany = (newCompany: CompanyModel) => API.post(endPoint, newCompany)
     .then((data: any) => {
-        console.log(data)
         notify(data.data.message);
         return data.data
     })
@@ -20,7 +19,6 @@ export const createCompany = (newCompany: CompanyModel) => API.post(endPoint, ne
 
 export const updateCompany = (id: number, updatedCompany: CompanyModel) => API.put(`${endPoint}/${id}`, updatedCompany)
     .then((data: any) => {
-        console.log(data)
         notify(data.data.message);
         return data.data
     })
@@ -28,7 +26,6 @@ export const updateCompany = (id: number, updatedCompany: CompanyModel) => API.p
 
 export const deleteCompany = (id: number) => API.patch(`${endPoint}/${id}`)
     .then((data: any) => {
-        console.log(data)
         notify(data.data.message);
         return data.data
     })

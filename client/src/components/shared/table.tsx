@@ -48,14 +48,17 @@ const SharedTable = ({ rows, columns, update, upDown }: { rows: any, columns: an
                                                 </TableCell>
                                             );
                                         })}
-                                        <TableCell key='actions' align='right'>
-                                            <Button size='small' color='primary' onClick={() => update(row)}>
-                                                <EditIcon fontSize="small" />
-                                            </Button>
-                                            <Button size='small' color='secondary' onClick={() => upDown(row.id)}>
-                                                <DeleteIcon fontSize="small" />
-                                            </Button>
-                                        </TableCell>
+                                        {
+                                            (row.company || row.webURL) &&
+                                            <TableCell key='actions' align='right'>
+                                                <Button size='small' color='primary' onClick={() => update(row)}>
+                                                    <EditIcon fontSize="small" />
+                                                </Button>
+                                                <Button size='small' color='secondary' onClick={() => upDown(row.id)}>
+                                                    <DeleteIcon fontSize="small" />
+                                                </Button>
+                                            </TableCell>
+                                        }
                                     </TableRow>
                                 );
                             })}

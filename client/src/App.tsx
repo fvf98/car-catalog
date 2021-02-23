@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, AppBar, Button, Grow, Grid, Toolbar, InputBase, Tabs, Tab, Box, Typography } from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
+import { Container, AppBar, Button, Grow, Grid, Toolbar, Tabs, Tab, Box } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -13,6 +12,8 @@ import { RootState } from './redux/reducers';
 import { logOut } from './redux/actions/auth';
 import { getCompanies } from './redux/actions/company';
 import Companies from './components/Admin/Companies/Companies';
+import { getUsers } from './redux/actions/user';
+import Users from './components/Admin/Users/Users';
 
 interface TabPanelProps {
 	children?: React.ReactNode;
@@ -61,10 +62,12 @@ function App() {
 			if (userData.user.roles != 'Administrador') {
 				dispatch(getCars(userData.user.company.id));
 				dispatch(getCompanies(userData.user.company.id));
+				dispatch(getUsers(userData.user.company.id));
 			}
 			else {
 				dispatch(getCars(0, true));
 				dispatch(getCompanies());
+				dispatch(getUsers());
 			}
 		}
 		else dispatch(getCars());
@@ -138,8 +141,8 @@ function App() {
 								<Companies />
 							</TabPanel>
 							<TabPanel value={value} index={2}>
-								Page Two
-              				</TabPanel>
+								<Users />
+							</TabPanel>
 						</Container>
 				}
 			</Grow>

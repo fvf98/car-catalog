@@ -12,7 +12,6 @@ export const fetchCars = () => API.get(endPoint)
 
 export const createCar = (newCar: CarModel) => API.post(endPoint, newCar)
     .then((data: any) => {
-        console.log(data)
         notify(data.data.message);
         return data.data
     })
@@ -20,7 +19,6 @@ export const createCar = (newCar: CarModel) => API.post(endPoint, newCar)
 
 export const updateCar = (id: number, updatedCar: CarModel) => API.put(`${endPoint}/${id}`, updatedCar)
     .then((data: any) => {
-        console.log(data)
         notify(data.data.message);
         return data.data
     })
@@ -28,7 +26,6 @@ export const updateCar = (id: number, updatedCar: CarModel) => API.put(`${endPoi
 
 export const deleteCar = (id: number) => API.patch(`${endPoint}/${id}`)
     .then((data: any) => {
-        console.log(data)
         notify(data.data.message);
         return data.data
     })
