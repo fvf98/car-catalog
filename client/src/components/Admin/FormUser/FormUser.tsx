@@ -27,7 +27,7 @@ const FormUser = ({ isOpenUser, setOpenUser }: { isOpenUser: boolean, setOpenUse
     const report = (text: String) => toast.error(text);
 
     const handleSubmit = () => {
-        if (userForm.name && userForm.lastName && userForm.email && userForm.roles) {
+        if (userForm.name && userForm.lastName && userForm.email && userForm.roles && userForm.company.id) {
             if (user.id) {
                 if (userForm.password)
                     dispatch(updateUser(user.id, userForm));
@@ -44,7 +44,7 @@ const FormUser = ({ isOpenUser, setOpenUser }: { isOpenUser: boolean, setOpenUse
 
     return (
         <Dialog open={isOpenUser} onClose={handleClose} aria-labelledby="FormUser">
-            <DialogTitle id="FormUser">{user.id ? 'Modificar usuario' : 'Nueva usuario'}</DialogTitle>
+            <DialogTitle id="FormUser">{user.id ? 'Modificar usuario' : 'Nuevo usuario'}</DialogTitle>
             <DialogContent>
                 <InputLabel id="company">Compañia</InputLabel>
                 <Select
@@ -64,7 +64,7 @@ const FormUser = ({ isOpenUser, setOpenUser }: { isOpenUser: boolean, setOpenUse
                     autoFocus
                     margin="dense"
                     id="name"
-                    label="Name"
+                    label="Nombre"
                     fullWidth
                     value={userForm.name}
                     onChange={(e) => setUserForm({ ...userForm, name: e.target.value })}

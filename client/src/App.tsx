@@ -78,7 +78,7 @@ function App() {
 	};
 
 	return (
-		<Container maxWidth='lg'>
+		<Container maxWidth='xl'>
 			<ToastContainer
 				position="top-right"
 				autoClose={5000}
@@ -121,7 +121,7 @@ function App() {
 			<Grow in>
 				{
 					!userData.accessToken ?
-						<Container>
+						<Container maxWidth='xl'>
 							<Grid container justify='space-between' alignItems='stretch' spacing={3}>
 								<Grid item xs='auto' sm={12}>
 									<Cars />
@@ -129,7 +129,7 @@ function App() {
 							</Grid>
 						</Container>
 						:
-						<Container>
+						<Container maxWidth='xl'>
 							<TabPanel value={value} index={0}>
 								<Grid container justify='space-between' alignItems='stretch' spacing={3}>
 									<Grid item xs='auto' sm={12}>

@@ -16,7 +16,10 @@ const FormLogin = ({ isOpenLogin, setOpenLogin }: { isOpenLogin: boolean, setOpe
     const report = (text: String) => toast.error(text);
 
     const handleSubmit = () => {
-        if (authForm.email && authForm.password) dispatch(login(authForm));
+        if (authForm.email && authForm.password) {
+            handleClose();
+            dispatch(login(authForm));
+        }
         else report('Favor de llenar los datos');
     }
 

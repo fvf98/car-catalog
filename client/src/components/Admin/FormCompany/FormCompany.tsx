@@ -44,7 +44,7 @@ const FormCompany = ({ isOpenCompany, setOpenCompany }: { isOpenCompany: boolean
                     autoFocus
                     margin="dense"
                     id="name"
-                    label="Name"
+                    label="Nombre"
                     fullWidth
                     value={companyForm.name}
                     onChange={(e) => setCompanyForm({ ...companyForm, name: e.target.value })}

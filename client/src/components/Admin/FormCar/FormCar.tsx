@@ -25,7 +25,7 @@ const FormCar = ({ isOpenCar, setOpenCar }: { isOpenCar: boolean, setOpenCar: an
     const report = (text: String) => toast.error(text);
 
     const handleSubmit = () => {
-        if (carForm.name && carForm.company && carForm.model && carForm.motor && carForm.power && carForm.transmission
+        if (carForm.name && carForm.company.id && carForm.model && carForm.motor && carForm.power && carForm.transmission
             && carForm.cylinders && carForm.numDoors && carForm.image && carForm.colors && carForm.price) {
             if (car.id)
                 dispatch(updateCar(car.id, carForm));
@@ -44,7 +44,7 @@ const FormCar = ({ isOpenCar, setOpenCar }: { isOpenCar: boolean, setOpenCar: an
                     autoFocus
                     margin="dense"
                     id="name"
-                    label="Name"
+                    label="Nombre"
                     fullWidth
                     value={carForm.name}
                     onChange={(e) => setCarForm({ ...carForm, name: e.target.value })}
@@ -89,7 +89,7 @@ const FormCar = ({ isOpenCar, setOpenCar }: { isOpenCar: boolean, setOpenCar: an
                 <TextField
                     margin="dense"
                     id="transmision"
-                    label="Transmision"
+                    label="Transmisión"
                     fullWidth
                     value={carForm.transmission}
                     onChange={(e) => setCarForm({ ...carForm, transmission: e.target.value })}

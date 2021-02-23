@@ -28,7 +28,7 @@ const Car = ({ car, setOpenCar }: { car: CarModel, setOpenCar: any }) => {
                 <CardContent >
                     <Typography variant='body1' color='textSecondary'>Modelo: {car.model}</Typography>
                     <Typography variant='body1' color='textSecondary'>Motor: {car.motor}</Typography>
-                    <Typography variant='body1' color='textSecondary'>Transmicion: {car.transmission}</Typography>
+                    <Typography variant='body1' color='textSecondary'>Transmisión: {car.transmission}</Typography>
                     <Typography variant='body1' color='textSecondary'>Potencia: {car.power}</Typography>
                     <Typography variant='body1' color='textSecondary'>Cilindros: {car.cylinders}</Typography>
                     <Typography variant='body1' color='textSecondary'>Numero de puertas: {car.numDoors}</Typography>

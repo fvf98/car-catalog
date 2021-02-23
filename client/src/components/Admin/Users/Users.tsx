@@ -37,7 +37,7 @@ const Users = () => {
     return (
         <>
             <div className={classes.add}>
-                <Button variant='contained' color='primary' onClick={() => setOpenUser(true)}> <AddIcon fontSize="large" />Nueva compañia</Button>
+                <Button variant='contained' color='primary' onClick={() => setOpenUser(true)}> <AddIcon fontSize="large" />Nuevo usuario</Button>
                 <FormUser isOpenUser={isOpenUser} setOpenUser={setOpenUser} />
             </div>
             <SharedTable rows={users} columns={columns} update={update} upDown={upDown} />
