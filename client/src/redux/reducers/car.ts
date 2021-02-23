@@ -1,4 +1,4 @@
-import { FETCH_ALL_CARS, CREATE_CAR, UPDATE_CAR, DELETE_CAR, SET_EDITING_CAR } from '../../constants/actionTypes';
+import { FETCH_ALL_CARS, CREATE_CAR, UPDATE_CAR, DELETE_CAR, SET_EDITING_CAR, FETCH_FILTER_CARS } from '../../constants/actionTypes';
 import { CarModel, initialCarModel } from '../../models/Car.model';
 import { CarState } from '../../models/CarState.mode';
 
@@ -13,6 +13,8 @@ export default (cars: CarState = initialState, action: { type: any; payload: any
                 return { ...cars, carList: action.payload.data };
             else
                 return { ...cars, carList: action.payload.data.filter((car: CarModel) => car.status === true) };
+        case FETCH_FILTER_CARS:
+            return { ...cars, carList: action.payload.data.filter((car: CarModel) => (JSON.stringify(car).toLowerCase().indexOf(action.payload.value.toLowerCase()) !== -1) && (car.status === true)) };
         case CREATE_CAR:
             return { ...cars, carList: [...cars.carList, action.payload] };
         case SET_EDITING_CAR:

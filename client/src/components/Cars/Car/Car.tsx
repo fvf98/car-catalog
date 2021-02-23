@@ -17,7 +17,7 @@ const Car = ({ car, setOpenCar }: { car: CarModel, setOpenCar: any }) => {
     return (
         <div>
             <Card className={classes.card}>
-                <CardMedia className={classes.media} image={car.image} title='asd' />
+                <CardMedia className={classes.media} image={car.image} title={car.name} />
                 <div className={classes.overlay}>
                     <Typography variant='h6' color='primary'>{car.company.name}</Typography>
                 </div>

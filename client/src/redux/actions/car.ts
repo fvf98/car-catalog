@@ -1,4 +1,4 @@
-import { FETCH_ALL_CARS, CREATE_CAR, UPDATE_CAR, DELETE_CAR, SET_EDITING_CAR } from '../../constants/actionTypes';
+import { FETCH_ALL_CARS, CREATE_CAR, UPDATE_CAR, DELETE_CAR, SET_EDITING_CAR, FETCH_FILTER_CARS } from '../../constants/actionTypes';
 import { CarModel } from '../../models/Car.model';
 import * as carService from '../../services/car.service';
 
@@ -41,4 +41,13 @@ export const deleteCar = (id: number) => async (dispatch: any) => {
     dispatch({ type: DELETE_CAR, payload: id });
 
 };
+
+export const filterCars = (value: string) => async (dispatch: any) => {
+    const response = await carService.fetchCars();
+
+    if (response.data) {
+        const { data } = response;
+        dispatch({ type: FETCH_FILTER_CARS, payload: { data, value } });
+    }
+}
 

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Container, AppBar, Button, Grow, Grid, Toolbar, Tabs, Tab, Box } from '@material-ui/core';
+import { Container, AppBar, Button, Grow, Grid, Toolbar, Tabs, Tab, Box, InputBase } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
+import SearchIcon from '@material-ui/icons/Search';
 import 'react-toastify/dist/ReactToastify.css';
 
 import Cars from './components/Cars/Cars';
 import useStyles from './styles';
-import { getCars } from './redux/actions/car';
+import { getCars, filterCars } from './redux/actions/car';
 import FormLogin from './components/Admin/FormLogin/FormLogin';
 import { RootState } from './redux/reducers';
 import { logOut } from './redux/actions/auth';
@@ -51,6 +52,7 @@ function a11yProps(index: any) {
 function App() {
 	const userData = useSelector((store: RootState) => store.userLogged);
 	const [isOpenLogin, setOpenLogin] = useState(false);
+	const [filterField, setFilterFiled] = useState('company');
 	const [value, setValue] = React.useState(0);
 	const dispatch = useDispatch();
 
@@ -77,6 +79,11 @@ function App() {
 		setValue(newValue);
 	};
 
+	const filter = (value: string) => {
+		if (value) dispatch(filterCars(value));
+		else dispatch(getCars());
+	}
+
 	return (
 		<Container maxWidth='xl'>
 			<ToastContainer
@@ -95,6 +102,19 @@ function App() {
 						{!userData.accessToken ?
 							<>
 								<Button color="inherit" onClick={() => setOpenLogin(true)}>Iniciar sesion</Button>
+								<div className={classes.search}>
+									<div className={classes.searchIcon}>
+										<SearchIcon />
+									</div>
+									<InputBase
+										placeholder="Filtrar..."
+										classes={{
+											root: classes.inputRoot,
+											input: classes.inputInput,
+										}}
+										onChange={(e) => filter(e.target.value)}
+									/>
+								</div>
 							</>
 							:
 							<>
